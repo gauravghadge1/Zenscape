@@ -15,9 +15,16 @@ Due to an MCP JSON parsing bug with the Labels array, you must split how you ass
   - If you can execute the code autonomously: Use `[ai-task]`
   - If the task requires human physical intervention: Use `[manual-task]`
   - Format: `[TAG] Actual Task Title`
-- **Components (Via Payload):** You **MUST** pass the component normally through the MCP tool payload. Choose one from: `Strategy`, `Development`, `Data Engineering`, `QA-Testing`, or `Infrastructure`.
 
-## 3. Strict Description Template
+## 3. Ticket Categorization via Epics
+
+**Important:** Jira team-managed projects do not support Components in the UI. Components passed via MCP API are silently accepted but remain invisible and non-filterable on the Kanban board. Therefore, we use **Epics** for categorization.
+
+- Before creating individual Task tickets, **first create a parent Epic** that represents the project or feature being built.
+- When creating each Task ticket, pass the Epic's Issue Key as the `parent` field to link the Task under the Epic.
+- Epics provide visible grouping, board filtering, and proper hierarchy in team-managed projects.
+
+## 4. Strict Description Template
 You must format the ticket description using this exact markdown structure. Do not deviate or omit sections:
 
 ### 1. Context & Architecture
