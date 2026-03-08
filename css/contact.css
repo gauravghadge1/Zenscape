@@ -1,0 +1,118 @@
+/* Contact Page Specific Styles */
+
+/* Animations */
+@keyframes slide-up-fade {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.contact-header {
+    animation: slide-up-fade 0.8s ease-out forwards;
+}
+
+.contact-info {
+    animation: slide-up-fade 0.8s ease-out 0.2s forwards;
+    opacity: 0;
+}
+
+.contact-form-container {
+    animation: slide-up-fade 0.8s ease-out 0.4s forwards;
+    opacity: 0;
+}
+
+.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.max-w-5xl {
+    max-width: 64rem;
+}
+
+.mr-4 {
+    margin-right: var(--spacing-4);
+}
+
+.contact-socials .social-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-full);
+    background-color: var(--color-bg-elevated);
+    color: var(--color-primary);
+    transition: all var(--transition-normal);
+}
+
+.contact-socials .social-circle:hover {
+    background-color: var(--color-primary);
+    color: var(--color-bg-base);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-glow-primary);
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: var(--spacing-4);
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: var(--spacing-2);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-secondary);
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: var(--spacing-3) var(--spacing-4);
+    background-color: var(--color-bg-base);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    color: var(--color-text-primary);
+    transition: all var(--transition-fast);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(94, 234, 212, 0.2);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: var(--color-text-muted);
+}
+
+.submit-btn {
+    width: 100%;
+    padding: var(--spacing-3) var(--spacing-6);
+    background-color: var(--color-primary);
+    color: #1a1a1a;
+    border-radius: var(--radius-md);
+    margin-top: var(--spacing-2);
+    box-shadow: var(--shadow-glow-primary);
+    transition: all var(--transition-normal);
+    cursor: pointer;
+    font-weight: var(--font-weight-semibold);
+    border: none;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(94, 234, 212, 0.6);
+    background-color: #7ceadd; /* Assuming primary is a teal, make it slightly lighter */
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
