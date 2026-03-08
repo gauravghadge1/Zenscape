@@ -6,16 +6,16 @@ description: How to manage version control and commits to GitHub
 To maintain high development velocity while enforcing quality control, you are strictly forbidden from pushing code directly to the `main` branch. You must follow the Pull Request workflow below:
 
 ## 1. Branching
-Create a new local branch formatted as `feature/[JIRA_ISSUE_KEY]-short-description`.
+Use the `mcp_github-mcp-server_create_branch` tool to autonomously create a new branch formatted as `feature/[JIRA_ISSUE_KEY]-short-description` off of the default branch.
 
-## 2. Committing
-Commit your code using the standard format including the Jira Issue Key you created for the task:
+## 2. Committing & Pushing
+To avoid bothering the user with manual terminal approval for Git commands, you **MUST** use the GitHub MCP server to commit and push changes remotely.
+Use the `mcp_github-mcp-server_push_files` tool (for multiple files) or `mcp_github-mcp-server_create_or_update_file` tool (for single files) instead of running local terminal `git commit` and `git push` commands.
+
+Commit your code using the standard format including the Jira Issue Key:
 `feat([JIRA_ISSUE_KEY]): description`
 
 Example: `feat(SDLC-12): Implement Kotak Neo Python SQLite connection string`
-
-## 3. Pushing
-Push your local tracking branch to the remote repository.
 
 ## 4. Pull Request
 Use the GitHub MCP server to autonomously open a Pull Request into the `main` branch. The PR title must include the Jira Issue Key.
