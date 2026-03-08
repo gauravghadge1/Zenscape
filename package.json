@@ -1,0 +1,24 @@
+{
+  "name": "zenscape",
+  "version": "1.0.0",
+  "description": "🎧 Zenscape — An ambient sound mixer web app for focus, relaxation, and sleep. Built autonomously by the Autonomous Software Factory.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "live-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gauravghadge1/Zenscape.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gauravghadge1/Zenscape/issues"
+  },
+  "homepage": "https://github.com/gauravghadge1/Zenscape#readme",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
