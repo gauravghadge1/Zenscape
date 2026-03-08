@@ -22,4 +22,4 @@ You must follow these core policies above all other general development instruct
 
 5. **Document your Work**: Use the Atlassian MCP tool to logically separate architectural designs by generating and updating Confluence documentation.
 
-6. **Slack Success Logging**: Upon successful transition of a ticket to `Done`, automatically log the success to the company Slack channel via the Slack MCP server.
+6. **Slack Status Logging**: When you complete development on a ticket and open a Pull Request (moving it to `IN REVIEW`), or upon successful transition of a ticket to `Done`, automatically log your success and current status to the company Slack channel via the Slack MCP server.
