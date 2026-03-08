@@ -6,13 +6,13 @@ export class AudioEngine {
     constructor() {
         // AudioContext is initialized lazily based on user interaction due to browser autoplay policies
         this.context = null;
-        
+
         // Store decoded AudioBuffer objects
         this.buffers = new Map();
-        
+
         // Store active AudioBufferSourceNode objects
         this.activeSources = new Map();
-        
+
         // Master gain (volume) node
         this.masterGain = null;
     }
@@ -24,11 +24,11 @@ export class AudioEngine {
         if (!this.context) {
             const AudioContextClass = window.AudioContext || window.webkitAudioContext;
             this.context = new AudioContextClass();
-            
+
             // Create a master volume control
             this.masterGain = this.context.createGain();
             this.masterGain.connect(this.context.destination);
-            
+
             console.log("AudioEngine: AudioContext initialized.", this.context.state);
         } else if (this.context.state === 'suspended') {
             this.context.resume();
@@ -46,20 +46,20 @@ export class AudioEngine {
         if (!this.context) {
             console.warn("AudioEngine: AudioContext not initialized. Call init() first.");
             // We can still initialize it here if the user hasn't clicked yet, but context might remain suspended.
-            this.init(); 
+            this.init();
         }
 
         try {
             console.log(`AudioEngine: Loading sound '${name}' from ${url}...`);
             const response = await fetch(url);
-            
+
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-            
+
             const arrayBuffer = await response.arrayBuffer();
             const audioBuffer = await this.context.decodeAudioData(arrayBuffer);
-            
+
             this.buffers.set(name, audioBuffer);
             console.log(`AudioEngine: Successfully loaded and decoded '${name}'.`);
         } catch (error) {
@@ -121,22 +121,22 @@ export class AudioEngine {
     stopSound(name) {
         if (this.activeSources.has(name)) {
             const { source, gainNode } = this.activeSources.get(name);
-            
+
             try {
                 // Optional: add a slight fade out here by ramping gain to 0 before stopping
                 gainNode.gain.setValueAtTime(gainNode.gain.value, this.context.currentTime);
                 gainNode.gain.exponentialRampToValueAtTime(0.001, this.context.currentTime + 0.5);
-                
+
                 source.stop(this.context.currentTime + 0.5);
             } catch (e) {
                 source.stop(); // Fallback to immediate stop
             }
-            
+
             // Clean up
             source.disconnect();
             gainNode.disconnect();
             this.activeSources.delete(name);
-            
+
             console.log(`AudioEngine: Stopped '${name}'.`);
         } else {
             console.warn(`AudioEngine: Cannot stop '${name}' (not playing).`);
@@ -151,7 +151,7 @@ export class AudioEngine {
     setVolume(name, volume) {
         if (this.activeSources.has(name)) {
             const { gainNode } = this.activeSources.get(name);
-            
+
             // Avoid popping noises by resolving value over a tiny timeframe
             const safeVolume = Math.max(0.0001, Math.min(1.0, volume));
             gainNode.gain.setTargetAtTime(safeVolume, this.context.currentTime, 0.05);
@@ -209,20 +209,22 @@ export const DEFAULT_SOUNDS = [
     { name: 'cafe', url: 'https://freesound.org/data/previews/209/209355_3770387-lq.mp3' }
 ];
 
+import { getPresets, loadPreset } from './presets.js';
+
 // Provide global access for browser console testing as requested in Acceptance Criteria
 window.initAudioEngineForTesting = async () => {
     console.log("Initializing Audio Engine Testing Sandbox...");
-    
+
     window.zenAudio = new AudioEngine();
     window.zenAudio.init(); // Note: must be called as response to user action usually, but testing is fine.
 
     console.log("Loading placeholder sounds. Please wait...");
-    const loadPromises = DEFAULT_SOUNDS.map(sound => 
+    const loadPromises = DEFAULT_SOUNDS.map(sound =>
         window.zenAudio.loadSound(sound.name, sound.url)
     );
-    
+
     await Promise.all(loadPromises);
-    
+
     console.log("-----------------------------------------");
     console.log("✅ AudioEngine Test Sandbox Ready!");
     console.log("-----------------------------------------");
@@ -233,4 +235,7 @@ window.initAudioEngineForTesting = async () => {
     console.log("  zenAudio.setMasterVolume(0.5)");
     console.log("  zenAudio.toggleSound('fire')");
     console.log("  zenAudio.stopSound('rain')");
+    console.log("Presets commands available:");
+    console.log("  loadPreset('Focus')");
+    console.log("  getPresets()");
 };
