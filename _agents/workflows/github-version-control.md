@@ -19,4 +19,8 @@ Push your local tracking branch to the remote repository.
 
 ## 4. Pull Request
 Use the GitHub MCP server to autonomously open a Pull Request into the `main` branch. The PR title must include the Jira Issue Key.
-Once the PR is opened, your job as the Developer is complete. The Senior Reviewer Persona will evaluate the PR.
+
+## 5. Jira PR Link Comment
+After opening the Pull Request, use the Atlassian MCP to add a comment to the Jira ticket with the link to the opened Pull Request. This alerts the Senior Reviewer to begin their work.
+
+Once the PR is opened and the comment is posted, your job as the Developer is complete. The Senior Reviewer Persona will evaluate the PR.
