@@ -9,8 +9,8 @@ To maintain high development velocity while enforcing quality control, you are s
 Use the `mcp_github-mcp-server_create_branch` tool to autonomously create a new branch formatted as `feature/[JIRA_ISSUE_KEY]-short-description` off of the default branch.
 
 ## 2. Committing & Pushing
-To avoid bothering the user with manual terminal approval for Git commands, you **MUST** use the GitHub MCP server to commit and push changes remotely.
-Use the `mcp_github-mcp-server_push_files` tool (for multiple files) or `mcp_github-mcp-server_create_or_update_file` tool (for single files) instead of running local terminal `git commit` and `git push` commands.
+To achieve **100% autonomous GitHub Operations with 0 terminal interruptions**, you **MUST** use the GitHub MCP server to commit and push changes remotely. You are strictly forbidden from running local terminal `git commit` and `git push` commands as they cause manual approval prompts that block automation.
+Use the `mcp_github-mcp-server_push_files` tool (for multiple files) or `mcp_github-mcp-server_create_or_update_file` tool (for single files) instead.
 
 Commit your code using the standard format including the Jira Issue Key:
 `feat([JIRA_ISSUE_KEY]): description`
