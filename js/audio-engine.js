@@ -157,6 +157,42 @@ export class AudioEngine {
             gainNode.gain.setTargetAtTime(safeVolume, this.context.currentTime, 0.05);
         }
     }
+
+    /**
+     * Set the global master volume for all playing sounds.
+     * @param {number} volume - Volume level (0.0 to 1.0).
+     */
+    setMasterVolume(volume) {
+        if (this.masterGain) {
+            const safeVolume = Math.max(0.0001, Math.min(1.0, volume));
+            this.masterGain.gain.setTargetAtTime(safeVolume, this.context.currentTime, 0.05);
+            console.log(`AudioEngine: Master volume set to ${safeVolume}.`);
+        } else {
+            console.warn("AudioEngine: Master gain node not initialized.");
+        }
+    }
+
+    /**
+     * Checks if a specific sound is currently playing.
+     * @param {string} name - Identifier for the sound.
+     * @returns {boolean} - true if currently playing, false otherwise.
+     */
+    isSoundPlaying(name) {
+        return this.activeSources.has(name);
+    }
+
+    /**
+     * Toggles a sound between playing and stopped states.
+     * @param {string} name - Identifier for the sound.
+     * @param {number} volume - Initial volume if it starts playing. Defaults to 1.0.
+     */
+    toggleSound(name, volume = 1.0) {
+        if (this.isSoundPlaying(name)) {
+            this.stopSound(name);
+        } else {
+            this.playSound(name, volume);
+        }
+    }
 }
 
 // ---------------------------------------------------------------------
@@ -194,5 +230,7 @@ window.initAudioEngineForTesting = async () => {
     console.log("  zenAudio.playSound('rain')");
     console.log("  zenAudio.playSound('fire', 0.5)");
     console.log("  zenAudio.setVolume('rain', 0.2)");
+    console.log("  zenAudio.setMasterVolume(0.5)");
+    console.log("  zenAudio.toggleSound('fire')");
     console.log("  zenAudio.stopSound('rain')");
 };
