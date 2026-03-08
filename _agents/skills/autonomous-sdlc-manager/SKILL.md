@@ -17,7 +17,7 @@ You must follow these core policies above all other general development instruct
 
 3. **Sub-Tasking and Blocking**: If you hit an unexpected roadblock—like a missing schema change, infrastructure requirement, or key structural gap—you must pause. Autonomously create a new blocking Jira ticket that describes this sub-task before building out the code to fix it.
 
-4. **Version Control & Pull Requests**: You are strictly forbidden from pushing code directly to the `main` branch. After completing the ticket's Acceptance Criteria and passing tests, automatically create a feature branch, commit your code, push the branch to remote, and use the GitHub MCP server to open a Pull Request into `main`. 
+4. **Version Control & Pull Requests**: You are strictly forbidden from pushing code directly to the `main` branch. After completing the ticket's Acceptance Criteria and passing tests, you must utilize the GitHub MCP extension for all git operations (branching, committing, pushing, and PR creation) to achieve **100% autonomous operations with 0 local terminal interruptions**. No manual terminal Git commands are allowed. 
    (Follow the `github-version-control.md` workflow).
 
 5. **Document your Work**: Use the Atlassian MCP tool to logically separate architectural designs by generating and updating Confluence documentation.
